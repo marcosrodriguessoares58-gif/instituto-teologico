@@ -7,4 +7,20 @@ html, body, #root {
   background-color: #000000 !important;
   color: #e0e0e0;
   overflow-x: hidden; /* Evita barras de rolagem laterais */
+}/* Reseta o tamanho de tudo para não ultrapassar a tela */
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Isso impede que o site "alargue" para os lados */
+}
+
+/* Garante que vídeos (iframes) e imagens não quebrem a tela */
+img, iframe, video {
+  max-width: 100%;
+  height: auto;
 }
