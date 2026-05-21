@@ -124,7 +124,7 @@ export default function App() {
             { id: "videos", label: "VÍDEOS ➔" },
             { id: "musicas", label: "MÚSICAS ➔" },
             { id: "apostilas", label: "APOSTILAS ➔" },
-            { id: "doacoes", label: "DOAÇÕES ❤️", cor: "#ff4444" }
+            { id: "inicio", label: "DOAÇÕES ❤️", cor: "#ff4444" }
           ].map((aba) => (
             <span key={aba.id} onClick={() => setAbaAtiva(aba.id)} style={{ cursor: 'pointer', color: aba.cor ? aba.cor : (abaAtiva === aba.id ? '#4caf50' : '#ffffff'), transition: 'color 0.2s' }}>
               {aba.label}
