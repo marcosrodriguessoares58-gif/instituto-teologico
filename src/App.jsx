@@ -1,29 +1,23 @@
-import React from 'react';
-import './App.css';
+{/* LÓGICA DA ABA MÚSICAS */}
+          {abaAtiva === 'Músicas' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '20px' }}>
+              <h3>Minhas Músicas</h3>
+              
+              {/* Exemplo de player de áudio */}
+              <div>
+                <p>Nome da Música 01</p>
+                <audio controls style={{ width: '100%' }}>
+                  <source src="/musicas/musica1.mp3" type="audio/mpeg" />
+                  Seu navegador não suporta o elemento de áudio.
+                </audio>
+              </div>
 
-function App() {
-  return (
-    <div className="container-principal">
-      <header className="caixa-conteudo">
-        <h1>Associação e Projeto Encontro com a Vida</h1>
-        <p className="subtitulo">Acolhendo vidas, restaurando esperanças.</p>
-        
-        <div className="info-local">
-          <p><strong>Endereço:</strong> Avenida Brasília, 2 - Serra Dourada II, Serra - ES</p>
-          <p className="versiculo">"Ide, fazei discípulos..." - Mateus 28</p>
-        </div>
-
-        <a 
-          href="https://wa.me/5527998863582" 
-          className="botao-whatsapp" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          Falar com a equipe (WhatsApp)
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+              <div>
+                <p>Nome da Música 02</p>
+                <audio controls style={{ width: '100%' }}>
+                  <source src="/musicas/musica2.mp3" type="audio/mpeg" />
+                  Seu navegador não suporta o elemento de áudio.
+                </audio>
+              </div>
+            </div>
+          )}export default App;
