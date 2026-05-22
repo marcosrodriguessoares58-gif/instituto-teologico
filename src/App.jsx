@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
-import './App.css'; // Vamos criar esse CSS já já
+import React from 'react';
+import './App.css';
 
 function App() {
-  const [aba, setAba] = useState('inicio');
-
   return (
     <div className="container-principal">
-      <header className="menu-topo">
-        <button onClick={() => setAba('inicio')}>INICIO</button>
-        <button onClick={() => setAba('fotos')}>FOTOS</button>
-        <button onClick={() => setAba('videos')}>VIDEOS</button>
-        <button onClick={() => setAba('musicas')}>MUSICAS</button>
-        <button onClick={() => setAba('apostilas')}>APOSTILAS</button>
-        <button onClick={() => setAba('doacoes')}>DOACOES</button>
-      </header>
+      <header className="caixa-conteudo">
+        <h1>Associação e Projeto Encontro com a Vida</h1>
+        <p className="subtitulo">Acolhendo vidas, restaurando esperanças.</p>
+        
+        <div className="info-local">
+          <p><strong>Endereço:</strong> Avenida Brasília, 2 - Serra Dourada II, Serra - ES</p>
+          <p className="versiculo">"Ide, fazei discípulos..." - Mateus 28</p>
+        </div>
 
-      <div className="conteudo">
-        {aba === 'inicio' && (
-          <div className="secao-inicio">
-            <h1>ASSOCIACAO E PROJETO ENCONTRO COM A VIDA</h1>
-            <p>Vinde A Mim, Todos Os Que Estais Cansados E Oprimidos, E Eu Vos Aliviarei - MATEUS 11:28</p>
-          </div>
-        )}
-        {/* Aqui entraremos com a lógica de fotos, vídeos, etc. */}
-      </div>
+        <a 
+          href="https://wa.me/5527998863582" 
+          className="botao-whatsapp" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          Falar com a equipe (WhatsApp)
+        </a>
+      </header>
     </div>
   );
 }
+
 export default App;
