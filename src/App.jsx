@@ -1,55 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [aba, setAba] = useState('inicio');
+
   return (
     <div className="App">
-      {/* 1. Header com Logo e Menu */}
       <header className="header-bar">
-        <div className="logo-container">
-          <div className="logo-icon">Ρ+</div> {/* Simplified logo Ρ for Rho */}
-          <h1>INSTITUTO TEOLÓGICO RHO</h1>
-        </div>
+        <h1>Instituto Teológico RHO</h1>
         <nav className="main-nav">
-          <a href="#inicio">Início</a>
-          <a href="#matriculas">Matrículas</a>
-          <a href="#cursos">Cursos</a>
-          <a href="#eventos">Eventos</a>
-          <a href="#contato">Contato</a>
+          <button onClick={() => setAba('inicio')}>Início</button>
+          <button onClick={() => setAba('fotos')}>Fotos</button>
+          <button onClick={() => setAba('videos')}>Vídeos</button>
+          <button onClick={() => setAba('musicas')}>Músicas</button>
+          <button onClick={() => setAba('apostilas')}>Apostilas</button>
+          <button onClick={() => setAba('doacoes')}>Doações</button>
         </nav>
       </header>
 
-      {/* 2. Banner Principal */}
-      <section className="hero-banner">
-        <h2>Bem-vindo ao Novo Portal de Fé</h2>
-        <p>Formação Teológica Profunda e Sistema de Matrículas.</p>
-      </section>
+      <main className="conteudo">
+        {aba === 'inicio' && <h2>Bem-vindo ao Instituto Teológico RHO</h2>}
+        
+        {aba === 'fotos' && (
+          <div className="galeria">
+            <h3>Galeria de Fotos</h3>
+            <p>Implementar Slider com setas aqui.</p>
+          </div>
+        )}
 
-      {/* 3. Seções do Sistema */}
-      <main className="system-sections">
-        {/* Card de Matrículas */}
-        <div id="matriculas" className="system-card">
-          <h3>SISTEMA DE MATRÍCULAS</h3>
-          <p>Inicie sua jornada teológica conosco.</p>
-          <a href="https://link-sistema-matriculas.com" target="_blank" rel="noopener noreferrer" className="main-button">
-            Fazer Matrícula: Clique Aqui
-          </a>
-        </div>
+        {aba === 'videos' && (
+          <div className="lista">
+            <h3>Lista de Vídeos</h3>
+            <ul>
+              <li>Vídeo 01: Aula de Teologia Sistemática</li>
+              <li>Vídeo 02: História da Igreja</li>
+            </ul>
+          </div>
+        )}
 
-        {/* Card de Cursos */}
-        <div id="cursos" className="system-card">
-          <h3>NOSSOS CURSOS</h3>
-          <p>Explore os programas e disciplinas atuais.</p>
-          <a href="#lista-cursos" className="main-button">
-            Nossos Cursos: Clique Aqui
-          </a>
-        </div>
+        {aba === 'musicas' && (
+          <div className="lista">
+            <h3>Biblioteca de Músicas</h3>
+            <ul>
+              <li>Louvor 01 - Nome da Música</li>
+              <li>Louvor 02 - Nome da Música</li>
+            </ul>
+          </div>
+        )}
+
+        {aba === 'apostilas' && (
+          <div className="grid-apostilas">
+            <h3>Nossas Apostilas</h3>
+            <div className="card-apostila">
+              <img src="capa-apostila.jpg" alt="Capa" />
+              <h4>Título do Cabeçalho da Apostila</h4>
+            </div>
+          </div>
+        )}
+
+        {aba === 'doacoes' && (
+          <div className="doacao">
+            <h3>Faça sua Doação</h3>
+            <img 
+              src="qrcode-pix.jpg" 
+              alt="QR Code" 
+              style={{ width: '200px', cursor: 'pointer' }}
+              onClick={(e) => e.target.style.width = e.target.style.width === '200px' ? '400px' : '200px'}
+            />
+            <p>Clique na imagem para aumentar/diminuir</p>
+          </div>
+        )}
       </main>
-
-      {/* Rodapé Simples */}
-      <footer style={{ backgroundColor: '#0A1931', color: '#FFFFFF', padding: '20px', textAlign: 'center' }}>
-        <p>&copy; 2026 Instituto Teológico Rho. Todos os direitos reservados.</p>
-      </footer>
     </div>
   );
 }
