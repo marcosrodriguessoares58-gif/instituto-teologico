@@ -55,4 +55,10 @@ export default defineConfig({
     port: 8080,
     host: true
   }
-});
+});import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  base: './', // Esta linha força os caminhos dos arquivos a serem relativos
+})
