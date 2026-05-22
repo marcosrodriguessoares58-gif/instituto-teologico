@@ -1,7 +1,9 @@
 function App() {
   return (
-    <div style={{ backgroundColor: 'blue', color: 'white', padding: '50px', fontSize: '30px' }}>
-      <h1>TESTE: Se você está vendo isto, o site funciona!</h1>
+    <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'Arial' }}>
+      <h1>Bem-vindo ao Instituto Teológico</h1>
+      <p>Este é o nosso novo portal oficial.</p>
+      <button onClick={() => alert('Site funcionando!')}>Clique aqui</button>
     </div>
   )
 }
