@@ -3,38 +3,37 @@ import { useState } from 'react';
 function App() {
   const [musicaAtual, setMusicaAtual] = useState(null);
 
-  // É AQUI QUE VOCÊ LISTA AS MÚSICAS!
-  // Se a lista estiver vazia, o site não mostra nada.
   const playlist = [
     { nome: "Oração de Alívio", id: "1XTtehdDUJv3Lh6HASJIm9JDCrXjVAYcS" },
-    // Adicione novas linhas aqui para cada música nova
+    // Adicione mais músicas aqui
   ];
 
   return (
-    <div className="main-container">
-      <header>
-        {/* Verifique se este nome de arquivo existe na sua pasta /public */}
-        <img src="/arte-pequena.jpg" alt="Banner" style={{width: '100%', maxWidth: '800px'}} />
-      </header>
+    <div style={{ background: '#f4e4bc', minHeight: '100vh', paddingBottom: '120px', fontFamily: 'sans-serif' }}>
+      
+      {/* Aqui não temos mais o bloco da imagem */}
 
-      <div style={{padding: '20px'}}>
-        <h2>🎵 Minhas Músicas</h2>
-        <div className="lista-de-musicas">
-          {playlist.map((musica, index) => (
-            <button 
-              key={index} 
-              onClick={() => setMusicaAtual(musica)}
-              style={{display: 'block', width: '100%', padding: '15px', margin: '10px 0', cursor: 'pointer'}}
-            >
-              💿 {musica.nome}
-            </button>
-          ))}
-        </div>
+      <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+        <h2 style={{ textAlign: 'center', color: '#8b4513' }}>🎵 Minhas Músicas</h2>
+        
+        {playlist.map((musica, index) => (
+          <button 
+            key={index} 
+            onClick={() => setMusicaAtual(musica)}
+            style={{ 
+              width: '100%', padding: '20px', marginBottom: '10px', 
+              fontSize: '18px', cursor: 'pointer', borderRadius: '8px', 
+              border: '1px solid #8b4513', background: '#fff', textAlign: 'left' 
+            }}
+          >
+            💿 {musica.nome}
+          </button>
+        ))}
       </div>
 
       {musicaAtual && (
-        <div style={{position: 'fixed', bottom: 0, width: '100%', background: '#333', color: '#fff', padding: '20px', textAlign: 'center'}}>
-          <p>Tocando: {musicaAtual.nome}</p>
+        <div style={{ position: 'fixed', bottom: 0, width: '100%', background: '#333', color: '#fff', padding: '15px', textAlign: 'center', borderTop: '5px solid #d4af37' }}>
+          <p style={{ margin: '0 0 10px 0' }}>Tocando: {musicaAtual.nome}</p>
           <audio controls autoPlay src={`https://drive.google.com/uc?export=download&id=${musicaAtual.id}`} />
         </div>
       )}
