@@ -7,7 +7,7 @@ function App() {
   // LISTA DE MÚSICAS: Adicione todas as suas músicas aqui
   const playlist = [
     { nome: "Oração de Alívio", id: "1XTtehdDUJv3Lh6HASJIm9JDCrXjVAYcS" },
-    // { nome: "Nome da outra musica", id: "ID_AQUI" },
+    // Para adicionar mais, siga o padrão: { nome: "Nome", id: "ID" },
   ];
 
   const musicasFiltradas = playlist.filter((m) =>
@@ -16,8 +16,10 @@ function App() {
 
   return (
     <div className="main-container">
+      {/* Banner */}
       <img src="/arte-pequena.jpg" alt="Banner" className="banner-image" />
       
+      {/* Biblioteca de Músicas */}
       <div className="music-library">
         <h2>🎵 Biblioteca de Músicas</h2>
         <input 
@@ -36,10 +38,11 @@ function App() {
         </div>
       </div>
 
+      {/* Player Fixo (só aparece quando uma música é selecionada) */}
       {musicaAtual && (
         <div className="player-sticky">
-          <h3>Tocando: {musicaAtual.nome}</h3>
-          <audio controls autoPlay key={musicaAtual.url} src={`https://drive.google.com/uc?export=download&id=${musicaAtual.id}`} />
+          <p style={{margin: '0 0 10px 0'}}>Tocando: <strong>{musicaAtual.nome}</strong></p>
+          <audio controls autoPlay key={musicaAtual.id} src={`https://drive.google.com/uc?export=download&id=${musicaAtual.id}`} />
         </div>
       )}
 
@@ -52,7 +55,7 @@ function App() {
         .playlist-grid { display: flex; flex-direction: column; gap: 10px; }
         .song-btn { padding: 15px; border: 1px solid #8b4513; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; font-weight: bold; }
         .song-btn:hover { background: #e0d0a0; }
-        .player-sticky { position: fixed; bottom: 0; width: 100%; background: #333; color: white; padding: 15px; text-align: center; border-top: 5px solid #d4af37; }
+        .player-sticky { position: fixed; bottom: 0; left: 0; width: 100%; background: #333; color: white; padding: 15px; text-align: center; border-top: 5px solid #d4af37; box-sizing: border-box; }
       `}</style>
     </div>
   );
