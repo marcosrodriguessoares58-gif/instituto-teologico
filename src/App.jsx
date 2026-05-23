@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function App() {
-  // A "abaAtual" controla qual conteúdo aparece na tela
   const [abaAtual, setAbaAtual] = useState('INÍCIO');
 
   return (
@@ -16,10 +15,10 @@ function App() {
         {['INÍCIO', 'FOTOS', 'VÍDEOS', 'DOAÇÕES'].map(aba => (
           <button 
             key={aba} 
-            onClick={() => setAbaAtual(aba)} // Ao clicar, muda a aba
+            onClick={() => setAbaAtual(aba)}
             style={{ 
               padding: '1vw 3vw', fontSize: '1.8vw', fontWeight: 'bold', 
-              background: abaAtual === aba ? '#d4af37' : '#1a4d2e', // Destaque na aba ativa
+              background: abaAtual === aba ? '#d4af37' : '#1a4d2e',
               color: 'white', border: 'none', cursor: 'pointer', borderRadius: '0.5vw' 
             }}
           >
@@ -28,7 +27,7 @@ function App() {
         ))}
       </nav>
 
-      {/* CONTEÚDO QUE MUDA CONFORME A ABA SELECIONADA */}
+      {/* CONTEÚDO CENTRALIZADO */}
       <div style={{ 
         textAlign: 'center', color: 'white', width: '90vw', padding: '3vw',
         border: '0.3vw solid #1a4d2e', borderRadius: '1vw'
@@ -48,7 +47,14 @@ function App() {
 
         {abaAtual === 'FOTOS' && <h1 style={{ fontSize: '4vw' }}>Galeria de Fotos (Em breve...)</h1>}
         {abaAtual === 'VÍDEOS' && <h1 style={{ fontSize: '4vw' }}>Vídeos do Projeto (Em breve...)</h1>}
-        {abaAtual === 'DOAÇÕES' && <h1 style={{ fontSize: '4vw' }}>Faça sua doação pelo PIX: 27999985514</h1>}
+        {abaAtual === 'DOAÇÕES' && (
+          <div>
+            <h1 style={{ fontSize: '3vw' }}>FAÇA SUA DOAÇÃO</h1>
+            <p style={{ fontSize: '2vw' }}>BANCO SICOOB</p>
+            <p style={{ fontSize: '4vw', fontWeight: 'bold', color: '#d4af37', margin: '2vw 0' }}>PIX: 0859513200014</p>
+            <p style={{ fontSize: '2vw' }}>Agradecemos sua colaboração.</p>
+          </div>
+        )}
 
       </div>
     </div>
