@@ -13,13 +13,15 @@ function App() {
   );
 
   return (
-    <div className="app-wrapper">
-      <header className="banner-area">
-        <img src="/arte-pequena.jpg" alt="Banner" className="banner-image" />
-      </header>
+    <div className="app-container">
+      {/* Arte Principal no Topo */}
+      <div className="hero-banner">
+        <img src="/arte-pequena.jpg" alt="Capa Principal" className="main-art" />
+      </div>
 
-      <main className="content-area">
-        <h2>🎵 Biblioteca de Músicas</h2>
+      {/* Conteúdo Abaixo */}
+      <main className="content-box">
+        <h2 className="title">🎵 Biblioteca de Músicas</h2>
         <input 
           type="text" 
           placeholder="🔍 Pesquisar música..." 
@@ -38,31 +40,29 @@ function App() {
 
       {musicaAtual && (
         <div className="player-sticky">
-          <p>Tocando agora: <strong>{musicaAtual.nome}</strong></p>
+          <p className="playing-text">Tocando agora: <strong>{musicaAtual.nome}</strong></p>
           <audio controls autoPlay key={musicaAtual.id} src={`https://drive.google.com/uc?export=download&id=${musicaAtual.id}`} />
         </div>
       )}
 
       <style>{`
-        body { margin: 0; background: #f4e4bc; font-family: sans-serif; }
-        .app-wrapper { display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 100px; }
+        body { margin: 0; background: #f4e4bc; font-family: 'Segoe UI', sans-serif; }
+        .app-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-bottom: 120px; }
         
-        /* Layout Computador */
-        .banner-area { width: 100%; display: flex; justify-content: center; background: #333; }
-        .banner-image { width: 100%; max-width: 800px; height: auto; }
+        /* Destaque da Arte Principal */
+        .hero-banner { width: 100%; display: flex; justify-content: center; background: #1a1a1a; margin-bottom: 30px; }
+        .main-art { width: 100%; max-width: 900px; height: auto; display: block; }
         
-        .content-area { width: 90%; max-width: 800px; margin: 20px auto; }
-        .search-bar { width: 100%; padding: 15px; border-radius: 8px; border: 2px solid #8b4513; margin-bottom: 20px; }
+        .content-box { width: 90%; max-width: 800px; }
+        .title { color: #8b4513; text-align: center; }
+        .search-bar { width: 100%; padding: 15px; border-radius: 8px; border: 2px solid #8b4513; margin-bottom: 25px; box-sizing: border-box; }
         
-        .playlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-        .song-btn { padding: 20px; border: 1px solid #8b4513; border-radius: 8px; background: #fff; cursor: pointer; font-weight: bold; }
+        .playlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+        .song-btn { padding: 20px; border: none; border-radius: 12px; background: #fff; cursor: pointer; font-weight: bold; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
+        .song-btn:hover { background: #d4af37; color: white; }
         
-        .player-sticky { position: fixed; bottom: 0; width: 100%; background: #333; color: white; padding: 20px; text-align: center; border-top: 5px solid #d4af37; }
-
-        /* Ajuste para Celular */
-        @media (max-width: 600px) {
-          .playlist-grid { grid-template-columns: 1fr; }
-        }
+        .player-sticky { position: fixed; bottom: 0; width: 100%; background: #333; color: white; padding: 15px; text-align: center; border-top: 5px solid #d4af37; box-sizing: border-box; }
+        .playing-text { margin: 0 0 10px 0; }
       `}</style>
     </div>
   );
