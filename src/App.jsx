@@ -3,24 +3,23 @@ import React, { useState } from 'react';
 function App() {
   const [abaAtual, setAbaAtual] = useState('INÍCIO');
 
+  // Links das imagens para a Galeria (Papel de Parede)
+  const fotosGaleria = [
+    "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=1470&auto=format&fit=crop", // Natureza/Acampamento
+    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1470&auto=format&fit=crop", // Montanhas/Superação
+    "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1632&auto=format&fit=crop", // União/Amizade
+    "https://images.unsplash.com/photo-1499244015948-ac754399834b?q=80&w=1632&auto=format&fit=crop"  // Caminho/Esperança
+  ];
+
   return (
     <div style={{ 
-      background: '#0a0a0a', 
-      minHeight: '100vh', 
-      width: '100%',
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'space-between', /* O segredo para esticar até embaixo */
-      padding: '20px 10px', 
-      fontFamily: 'Arial, sans-serif' 
+      background: '#0a0a0a', minHeight: '100vh', width: '100%',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', 
+      justifyContent: 'space-between', padding: '20px 10px', fontFamily: 'Arial, sans-serif' 
     }}>
       
-      {/* MENU DE ABAS - Fica no topo */}
-      <nav style={{ 
-        display: 'flex', flexWrap: 'wrap', justifyContent: 'center', 
-        gap: '8px', width: '100%', marginTop: '10px' 
-      }}>
+      {/* MENU DE ABAS */}
+      <nav style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px', width: '100%', zIndex: 10 }}>
         {['INÍCIO', 'FOTOS', 'VÍDEOS', 'DOAÇÕES'].map(aba => (
           <button 
             key={aba} 
@@ -36,13 +35,15 @@ function App() {
         ))}
       </nav>
 
-      {/* CONTEÚDO - Fica centralizado verticalmente */}
+      {/* CONTEÚDO DINÂMICO */}
       <div style={{ 
-        textAlign: 'center', color: 'white', width: '100%', padding: '20px',
-        border: '2px solid #1a4d2e', borderRadius: '10px',
-        display: 'flex', flexDirection: 'column', justifyContent: 'center', flexGrow: 1
+        textAlign: 'center', color: 'white', width: '100%', padding: '15px',
+        border: abaAtual === 'FOTOS' ? 'none' : '2px solid #1a4d2e', 
+        borderRadius: '10px', display: 'flex', flexDirection: 'column', 
+        justifyContent: 'center', flexGrow: 1, marginTop: '10px'
       }}>
         
+        {/* ABA INÍCIO */}
         {abaAtual === 'INÍCIO' && (
           <div>
             <h1 style={{ fontSize: '24px' }}>ASSOCIAÇÃO E PROJETO</h1>
@@ -55,8 +56,32 @@ function App() {
           </div>
         )}
 
-        {abaAtual === 'FOTOS' && <h1 style={{ fontSize: '22px' }}>Galeria de Fotos (Em breve...)</h1>}
+        {/* ABA FOTOS (PAPEL DE PAREDE / GALERIA) */}
+        {abaAtual === 'FOTOS' && (
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: '1fr 1fr', 
+            gap: '10px', 
+            height: '100%',
+            width: '100%' 
+          }}>
+            {fotosGaleria.map((url, index) => (
+              <div key={index} style={{ 
+                backgroundImage: `url(${url})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                borderRadius: '8px',
+                height: '35vh', // Faz as fotos ocuparem boa parte da altura
+                border: '2px solid #1a4d2e'
+              }} />
+            ))}
+          </div>
+        )}
+
+        {/* ABA VÍDEOS */}
         {abaAtual === 'VÍDEOS' && <h1 style={{ fontSize: '22px' }}>Vídeos do Projeto (Em breve...)</h1>}
+
+        {/* ABA DOAÇÕES */}
         {abaAtual === 'DOAÇÕES' && (
           <div>
             <h1 style={{ fontSize: '22px' }}>FAÇA SUA DOAÇÃO</h1>
@@ -67,7 +92,6 @@ function App() {
         )}
       </div>
 
-      {/* RODAPÉ - Garante que chegue no fim da tela */}
       <footer style={{ padding: '10px', color: '#555', fontSize: '12px' }}>
         Encontro com a Vida © 2026
       </footer>
