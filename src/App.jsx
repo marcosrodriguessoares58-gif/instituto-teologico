@@ -2,39 +2,38 @@ import React, { useState } from 'react';
 
 function App() {
   const [abaAtual, setAbaAtual] = useState('INÍCIO');
-  
-  // Controles da Galeria de Fotos Ampliada
   const [fotoAmpliada, setFotoAmpliada] = useState(null);
   const [indexFotoAtiva, setIndexFotoAtiva] = useState(0);
 
-  // Lista de imagens (Natureza/Superação/União)
+  // LISTA DE FOTOS REAIS (Baseada na sua pasta public/galeria)
+  // Certifique-se de que a extensão é .jpeg ou .jpg igual está na pasta
   const fotosGaleria = [
-    "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=1470&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1470&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1632&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1499244015948-ac754399834b?q=80&w=1632&auto=format&fit=crop"
+    "/galeria/WhatsApp Image 2026-05-18 at 08.30.32 (1).jpeg",
+    "/galeria/WhatsApp Image 2026-05-18 at 08.30.32 (2).jpeg",
+    "/galeria/WhatsApp Image 2026-05-18 at 08.30.32 (3).jpeg",
+    "/galeria/WhatsApp Image 2026-05-18 at 08.30.32.jpeg",
+    "/galeria/WhatsApp Image 2026-05-20 at 12.29.32.jpeg",
+    "/galeria/WhatsApp Image 2026-05-20 at 12.29.28.jpeg",
+    "/galeria/WhatsApp Image 2026-05-20 at 12.29.27.jpeg",
+    "/galeria/WhatsApp Image 2026-05-20 at 12.29.25.jpeg",
+    "/galeria/WhatsApp Image 2026-05-20 at 12.29.26.jpeg"
   ];
 
-  // Função para abrir o Modal com a foto clicada
   const abrirFoto = (index) => {
     setIndexFotoAtiva(index);
     setFotoAmpliada(fotosGaleria[index]);
   };
 
-  // Função para fechar o Modal
-  const fecharFoto = () => {
-    setFotoAmpliada(null);
-  };
+  const fecharFoto = () => setFotoAmpliada(null);
 
-  // Funções para mudar de foto dentro do Modal
   const proximaFoto = (e) => {
-    e.stopPropagation(); // Impede que o modal feche ao clicar no botão
+    e.stopPropagation();
     const novoIndex = (indexFotoAtiva + 1) % fotosGaleria.length;
     abrirFoto(novoIndex);
   };
 
   const anteriorFoto = (e) => {
-    e.stopPropagation(); // Impede que o modal feche ao clicar no botão
+    e.stopPropagation();
     const novoIndex = (indexFotoAtiva - 1 + fotosGaleria.length) % fotosGaleria.length;
     abrirFoto(novoIndex);
   };
@@ -43,10 +42,10 @@ function App() {
     <div style={{ 
       background: '#0a0a0a', minHeight: '100vh', width: '100%',
       display: 'flex', flexDirection: 'column', alignItems: 'center', 
-      justifyContent: 'space-between', padding: '25px 15px', fontFamily: 'Arial, sans-serif' 
+      justifyContent: 'center', padding: '25px 15px', fontFamily: 'Arial, sans-serif' 
     }}>
       
-      {/* MENU DE ABAS */}
+      {/* MENU */}
       <nav style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px', width: '100%', marginBottom: '20px' }}>
         {['INÍCIO', 'FOTOS', 'VÍDEOS', 'DOAÇÕES'].map(aba => (
           <button 
@@ -63,12 +62,12 @@ function App() {
         ))}
       </nav>
 
-      {/* CONTEÚDO */}
+      {/* CONTEÚDO CENTRAL */}
       <div style={{ 
-        textAlign: 'center', color: 'white', width: '100%', padding: '30px',
+        textAlign: 'center', color: 'white', width: '100%', padding: '20px',
         border: abaAtual === 'FOTOS' ? 'none' : '3px solid #1a4d2e', 
         borderRadius: '15px', display: 'flex', flexDirection: 'column', 
-        justifyContent: 'center', flexGrow: 1
+        justifyContent: 'center', minHeight: '60vh'
       }}>
         
         {abaAtual === 'INÍCIO' && (
@@ -83,18 +82,27 @@ function App() {
           </div>
         )}
 
-        {/* ABA FOTOS ATUALIZADA (COM CLIQUE E MODAL) */}
         {abaAtual === 'FOTOS' && (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', height: '100%' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
+            gap: '10px', 
+            width: '100%' 
+          }}>
             {fotosGaleria.map((url, index) => (
               <div 
                 key={index} 
-                onClick={() => abrirFoto(index)} // Abre a foto ao clicar
+                onClick={() => abrirFoto(index)}
                 style={{ 
-                  backgroundImage: `url(${url})`, backgroundSize: 'cover', backgroundPosition: 'center',
-                  borderRadius: '12px', height: '30vh', border: '3px solid #1a4d2e',
-                  cursor: 'pointer' // Muda o cursor para indicar que é clicável
-              }} />
+                  backgroundImage: `url("${url}")`, // Importante usar aspas duplas por causa dos espaços
+                  backgroundSize: 'cover', 
+                  backgroundPosition: 'center',
+                  borderRadius: '10px', 
+                  height: '150px', 
+                  border: '2px solid #1a4d2e',
+                  cursor: 'pointer'
+                }} 
+              />
             ))}
           </div>
         )}
@@ -104,66 +112,36 @@ function App() {
         {abaAtual === 'DOAÇÕES' && (
           <div>
             <h1 style={{ fontSize: '28px' }}>FAÇA SUA DOAÇÃO</h1>
-            <p style={{ fontSize: '20px' }}>BANCO SICOOB</p>
-            <p style={{ fontSize: '26px', fontWeight: 'bold', color: '#d4af37', margin: '20px 0' }}>PIX: 0859513200014</p>
-            <p style={{ fontSize: '20px' }}>Agradecemos sua colaboração.</p>
+            <p style={{ fontSize: '20px' }}>BANCO SICOOB - PIX</p>
+            <p style={{ fontSize: '26px', fontWeight: 'bold', color: '#d4af37', margin: '20px 0' }}>0859513200014</p>
           </div>
         )}
       </div>
 
-      <footer style={{ padding: '15px', color: '#888', fontSize: '14px' }}>
-        Encontro com a Vida © 2026
-      </footer>
-
-      {/* JANELA FLUTUANTE (MODAL) PARA A FOTO GRANDE */}
+      {/* MODAL DA FOTO AMPLIADA */}
       {fotoAmpliada && (
         <div 
-          onClick={fecharFoto} // Fecha se clicar no fundo
+          onClick={fecharFoto} 
           style={{
             position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-            background: 'rgba(0,0,0,0.9)', display: 'flex', alignItems: 'center', 
-            justifyContent: 'center', zIndex: 1000, cursor: 'zoom-out'
+            background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', 
+            justifyContent: 'center', zIndex: 1000
         }}>
-          {/* Botão Anterior */}
-          <button 
-            onClick={anteriorFoto}
-            style={{
-              position: 'absolute', left: '20px', background: 'rgba(255,255,255,0.2)',
-              color: 'white', border: 'none', fontSize: '40px', padding: '10px 20px',
-              cursor: 'pointer', borderRadius: '50%', zIndex: 1010
-          }}>‹</button>
-
-          {/* Imagem Ampliada */}
-          <img 
-            src={fotoAmpliada} 
-            alt="Foto Ampliada" 
-            style={{
-              maxWidth: '90%', maxHeight: '80%', 
-              borderRadius: '10px', border: '4px solid #1a4d2e',
-              cursor: 'default'
-          }} />
-
-          {/* Botão Próximo */}
-          <button 
-            onClick={proximaFoto}
-            style={{
-              position: 'absolute', right: '20px', background: 'rgba(255,255,255,0.2)',
-              color: 'white', border: 'none', fontSize: '40px', padding: '10px 20px',
-              cursor: 'pointer', borderRadius: '50%', zIndex: 1010
-          }}>›</button>
-
-          {/* Botão Fechar (X) */}
-          <button 
-            onClick={fecharFoto}
-            style={{
-              position: 'absolute', top: '20px', right: '20px', 
-              background: 'none', color: 'white', border: 'none', 
-              fontSize: '30px', cursor: 'pointer', fontWeight: 'bold'
-          }}>X</button>
+          <button onClick={anteriorFoto} style={btnNavStyle}>‹</button>
+          <img src={fotoAmpliada} alt="Zoom" style={{ maxWidth: '95%', maxHeight: '80%', borderRadius: '10px', border: '3px solid #1a4d2e' }} />
+          <button onClick={proximaFoto} style={btnNavStyle}>›</button>
+          <button onClick={fecharFoto} style={{ position: 'absolute', top: '20px', right: '20px', color: 'white', background: 'none', border: 'none', fontSize: '30px' }}>X</button>
         </div>
       )}
+
+      <footer style={{ marginTop: '20px', color: '#555', fontSize: '14px' }}>Encontro com a Vida © 2026</footer>
     </div>
   );
 }
+
+const btnNavStyle = {
+  background: 'rgba(255,255,255,0.1)', color: 'white', border: 'none', 
+  fontSize: '50px', padding: '0 20px', cursor: 'pointer', height: '100%'
+};
 
 export default App;
