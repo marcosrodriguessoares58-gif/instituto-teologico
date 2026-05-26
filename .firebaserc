@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "instituto-teologico-e3f43"
-  }
+    "default": "instituto-teologico-e3f43",
+    "mmsr": "marcos-msr"
+  },
+  "targets": {},
+  "etags": {}
 }
